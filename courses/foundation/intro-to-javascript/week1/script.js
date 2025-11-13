@@ -1,84 +1,77 @@
-console.log("You Can Select From 1 to 4");
-console.log("1: A future age calculator");
-console.log("2: A dog age calculator");
-console.log("3: A house price estimator");
-console.log("4: A Startup name generator");
-let yourChoose = prompt("Please Enter your Selection(1-4): ")
+console.log("Welcome! You can choose one of the following options:");
+console.log("1: Calculate your future age");
+console.log("2: Calculate your dog's age");
+console.log("3: Estimate a house price");
+console.log("4: Generate a startup name");
 
+let yourChoice = prompt("Please enter your selection (1-4): ");
 
-switch (yourChoose) {
+switch (yourChoice) {
     case "1": {
-        //Age-ify (A future age calculator)
+        // Age-ify (A future age calculator)
         let yearOfBirth = 1987;
         let yearFuture = 2027;
         let age = yearFuture - yearOfBirth;
-        console.log("\n**A future age calculator**")
-        console.log("You will be " + age + " years old in " + yearFuture + ".");
+
+        console.log("\nFuture Age Calculator");
+        console.log(`You will be ${age} years old in ${yearFuture}.`);
         break;
     }
 
-    case "2":
-        {//Goodboy-Oldboy (A dog age calculator)
-            // defaind and initial variable
-            let dogYearOfBirth = 2017;
-            let dogYearFuture = 2027;
-            let dogYear = dogYearFuture - dogYearOfBirth;
-            let shouldShowResultInDogYears = true;
+    case "2": {
+        // Goodboy-Oldboy (A dog age calculator)
+        let dogYearOfBirth = 2017;
+        let dogYearFuture = 2027;
+        let dogYear = dogYearFuture - dogYearOfBirth;
+        let shouldShowResultInDogYears = true;
 
-            //dispaly the result
-            console.log("\n**A dog age calculator**")
-            if (shouldShowResultInDogYears)//true
-                console.log(`Your dog will be ${dogYear * 7} dog years old in 2027`);
+        console.log("\nDog Age Calculator");
+        if (shouldShowResultInDogYears)
+            console.log(`Your dog will be ${dogYear * 7} dog years old in ${dogYearFuture}.`);
+        else
+            console.log(`Your dog will be ${dogYear} human years old in ${dogYearFuture}.`);
 
-            else //false
+        break;
+    }
 
-                console.log(`Your dog will be ${dogYear} human years old in 2027`);
+    case "3": {
+        // Housey pricey (A house price estimator)
+        let width = prompt("Please enter the width of the house (in meters):");
+        let height = prompt("Please enter the height of the house (in meters):");
+        let deep = prompt("Please enter the depth of the house (in meters):");
+        let gardenSizeInM2 = prompt("Please enter the garden size (in m²):");
+        let houseCost = prompt("Please enter the actual cost of the house:");
 
-            break;
-        }
-    case "3":
-        {
-            //Housey pricey (A house price estimator)
-            // Get Inputs
-            let width = prompt("Please Enter the Width of House");
-            let height = prompt("Please Enter the Height of House");
-            let deep = prompt("Please Enter the Deep of House");
-            let gardenSizeInM2 = prompt("Please Enter the Garden Size");
-            let houseCost = prompt("Please Enter the Houses Cost")
+        let volumeInMeters = width * height * deep;
+        let housePrice = volumeInMeters * 2.5 * 1000 + gardenSizeInM2 * 300;
 
-            //Calculation
-            let volumeInMeters = width * height * deep;
-            let housePrice = volumeInMeters * 2.5 * 1000 + gardenSizeInM2 * 300;
+        console.log("\nHouse Price Estimator");
+        console.log("The estimated house price is:", housePrice);
 
-            //Display the result
-            console.log("\n**A house price estimator**")
+        if (housePrice >= houseCost)
+            console.log("This house seems expensive compared to the estimated price.");
+        else
+            console.log("This house seems reasonably priced.");
 
-            console.log("The House Price is Caluculated :", housePrice);
+        break;
+    }
 
-            //Display the final result
+    case "4": {
+        // Ez Namey (Startup name generator)
+        let firstWords = ['Tech', 'Blue', 'Generation', 'Zero', 'One', 'World', 'Nothing', 'Be'];
+        let secondWords = ['Next', 'Brave', 'Is'];
 
+        let lengthOffirstWordsArray = firstWords.length;
+        let lengthOfsecondWordsArray = secondWords.length;
 
-            if (housePrice >= houseCost)
-                console.log("Thos is a Costly House");
-            else
-                console.log("This is Not Costly House");
+        const randomNumber1 = Math.floor(Math.random() * lengthOffirstWordsArray);
+        const randomNumber2 = Math.floor(Math.random() * lengthOfsecondWordsArray);
 
+        console.log("\nStartup Name Generator");
+        console.log(`Your startup's name could be: "${firstWords[randomNumber1]} ${secondWords[randomNumber2]}"`);
+        break;
+    }
 
-            break;
-        }
-    case "4":
-        {
-            // Ez Namey (Startup name generator) 
-
-            let firstWords = ['Tech', 'Blue', 'Generation', 'Zero', 'One', 'World', 'Nothing', 'Be'];
-            let secondWords = ['Next', 'Brave', 'Is'];
-
-            let lengthOffirstWordsArray = firstWords.length;
-            let lengthOfsecondWordsArray = secondWords.length;
-
-            const randomNumber1 = Math.floor(Math.random() * lengthOffirstWordsArray);
-            const randomNumber2 = Math.floor(Math.random() * lengthOfsecondWordsArray);
-            console.log("Your Startup's Name is :", firstWords[randomNumber1] + " " + secondWords[randomNumber2])
-
-        }
+    default:
+        console.log("Invalid selection! Please choose a number between 1 and 4.");
 }
