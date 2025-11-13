@@ -80,5 +80,11 @@ switch (yourChoose) {
             const randomNumber2 = Math.floor(Math.random() * lengthOfsecondWordsArray);
             console.log("Your Startup's Name is :", firstWords[randomNumber1] + " " + secondWords[randomNumber2])
 
-        }
+        console.log("\nStartup Name Generator");
+        console.log(`Your startup's name could be: "${firstWords[randomNumber1]} ${secondWords[randomNumber2]}"`);
+        break;
+    }
+
+    default:
+        console.log("Invalid selection! Please choose a number between 1 and 4.");
 }
