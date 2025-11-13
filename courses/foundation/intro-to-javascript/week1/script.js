@@ -67,7 +67,7 @@ switch (yourChoice) {
         const randomNumber1 = Math.floor(Math.random() * lengthOffirstWordsArray);
         const randomNumber2 = Math.floor(Math.random() * lengthOfsecondWordsArray);
 
-        console.log("\nStartup Name Generator");
+        console.log("\nStartup Name Generator For You");
         console.log(`Your startup's name could be: "${firstWords[randomNumber1]} ${secondWords[randomNumber2]}"`);
         break;
     }
