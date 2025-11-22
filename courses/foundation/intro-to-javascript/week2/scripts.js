@@ -75,8 +75,8 @@ check each of them and see if the name includes letter 'a' by name.includes('a')
 const ArrayOfFriendsName = ['Chris', 'Anne', 'Colin', 'Terri', 'Phil', 'Lola',
     'Sam', 'Kay', 'Bruce'];
 let counter = 0;
-for (i = 0; i <= ArrayOfFriendsName.length - 1; i++) {   //
-    captalName = ArrayOfFriendsName[i].toUpperCase();
+for (let i = 0; i <= ArrayOfFriendsName.length - 1; i++) {   //
+    let captalName = ArrayOfFriendsName[i].toUpperCase();
 
     if (captalName.includes('A')) {
         counter++;
@@ -114,7 +114,7 @@ function getIncomeTaxeRate(income) {
         taxRate = 0.15;
     } else if (income < 300000) {
         taxRate = 0.30;
-    } else { const taxRate = 0.50; }
+    } else { taxRate = 0.50; }
     return taxRate;
 
 }
@@ -168,10 +168,25 @@ function getFullName2(firstname,surname,female,useFormalName)
 
 
 //Event application
-/* */
+/**
+ * Returns the weekday name for a date that is `numberOfDays` days from today.
+ *
+ * Logic:
+ * 1. Get today's weekday index using `new Date().getDay()`
+ *    - 0 = Sunday, 1 = Monday, ... 6 = Saturday.
+ *
+ * 2. Store an array of weekday abbreviations in order.
+ *
+ * 3. Add today's index to `numberOfDays` to find the target day.
+ *
+ * 4. Use modulo 7 (`% 7`) so the index wraps around correctly
+ *    when the total exceeds 6 (e.g., going past Saturday loops to Sunday).
+ *
+ * 5. Log the resulting weekday name based on the calculated index.
+ */
 function getEventWeekday(numberOfDays) {
-    today = new Date().getDay();
-    weekDays = ['Sun', 'Mon', 'Tus', 'Wed', 'Thr', 'Fri', 'Sat'];
+    let today = new Date().getDay();
+    const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'];
     console.log(weekDays[(today + numberOfDays) % 7]);
 
 }
