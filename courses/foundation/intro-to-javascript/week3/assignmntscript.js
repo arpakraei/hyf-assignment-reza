@@ -179,3 +179,88 @@ updateNote(2, 'Time for learning');
 console.log(notes); 
 
 
+//Smart phone usage app
+let activities=[];
+const usageLimitPerDay=10;
+const today=new Date().toLocaleDateString();
+
+function addActivity(date,activity,duration)
+{
+    activities.push({'date':date,'activity':activity,'duration':duration})
+}
+addActivity(today,'Facebook',24);
+addActivity(today,'Youtub',38);
+addActivity(today,'TikTok',24);
+addActivity(today,'TikTok',20);
+
+console.log(activities);
+
+function showStatus(date){
+    let totalTime=0;
+    let numberOfActivityPerDay=0;
+   
+    for (activity of activities)
+    {
+        if (activity.date===date){
+            numberOfActivityPerDay+=1;
+            totalTime+=activity.duration;
+        }
+    }
+    if (numberOfActivityPerDay==0)
+    { 
+        console.log(`No activity activity on ${date}`);
+        return;
+    }
+    console.log(`You have added ${activities.length} activities. They amount to ${totalTime} min. of usage`);
+    
+    if (totalTime>usageLimitPerDay)
+    {
+        console.log('You have reached your limit, no more smartphoning for you!!!');
+    }
+}
+
+function getTheMostTimeActivity() {
+
+    // This array will store each unique activity with its total duration
+    let listOfActivity = [];
+
+    // Loop through all items in the activities array
+    for (let activity of activities) {
+
+        // Try to find this activity in listOfActivity
+        let existing = listOfActivity.find(item => item.activity === activity.activity);
+
+        // If activity is not found, add it as a new entry
+        if (!existing) {
+            listOfActivity.push({
+                activity: activity.activity,
+                totalDuration: activity.duration
+            });
+        } 
+        // If activity already exists, update its total duration
+        else {
+            existing.totalDuration += activity.duration;
+        }
+    }
+
+    // Show the summary list of all activities and their total durations
+    console.log(listOfActivity);
+
+    // Assume the first item has the most time
+    let activityTheMostTimeOnIt = listOfActivity[0];
+
+    // Loop through the rest of the list to find the real maximum
+    for (let i = 1; i < listOfActivity.length; i++) {
+
+        // If another activity has more time, update the maximum
+        if (listOfActivity[i].totalDuration > activityTheMostTimeOnIt.totalDuration) {
+            activityTheMostTimeOnIt = listOfActivity[i];
+        }
+    }
+
+    // Print the activity with the most total time
+    console.log(activityTheMostTimeOnIt);
+}
+
+showStatus('26/11/2025');
+getTheMostTimeActivity();
