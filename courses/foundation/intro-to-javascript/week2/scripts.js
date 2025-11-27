@@ -36,7 +36,7 @@ else {
 let result;
 let a = 1;
 let b = 1;
-result = (a + b < 4) ? 'Below' : 'Qver';
+result = (a + b < 4) ? 'Below' : 'Over';
 console.warn(result);
 
 
@@ -72,7 +72,7 @@ check each of them and see if the name includes letter 'a' by name.includes('a')
 - if it does not, log their name out
 
 */
-const ArrayOfFriendsName = ['Chris', 'Anne', 'Colin', 'Terri', 'Phil', 'Lola',
+const arrayOfFriendsName = ['Chris', 'Anne', 'Colin', 'Terri', 'Phil', 'Lola',
     'Sam', 'Kay', 'Bruce'];
 let counter = 0;
 for (let i = 0; i <= ArrayOfFriendsName.length - 1; i++) {   //
@@ -192,7 +192,21 @@ function getEventWeekday(numberOfDays) {
 }
 getEventWeekday(2);
 
-
+/**
+ * Determines recommended clothing based on the given temperature.
+ *
+ * Logic:
+ * 1. Check temperature ranges from coldest to warmest.
+ *    - If temperature < 0°C: return heavy winter clothing.
+ *    - If temperature < 10°C: return warm clothing suitable for cold weather.
+ *    - If temperature < 20°C: return mild-weather clothing.
+ *    - If temperature < 30°C: return light clothing for warm weather.
+ * 2. If none of the above conditions match (30°C or above),
+ *    return very light clothing for hot weather.
+ *
+ * The function evaluates conditions in ascending order,
+ * ensuring the first matching range returns the proper outfit.
+ */
 //Weather wear
 function getClothesForTemperature(temperature) {
     if (temperature < 0) {
