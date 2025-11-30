@@ -37,8 +37,36 @@ else {
     names.length--;
 }
 
-console.log(names); // ['Peter', 'Yana', 'kristina', 'Rasmus', 'Samuel', 'Katrine', 'Tala']
+console.log(names); 
+// ['Peter', 'Yana', 'kristina', 'Rasmus', 'Samuel', 'Katrine', 'Tala']
 
+
+
+// Simple and clear version using built-in functions
+
+const names2 = [
+  "Peter",
+  "Ahmad",
+  "Yana",
+  "kristina",
+  "Rasmus",
+  "Samuel",
+  "Katrine",
+  "Tala",
+];
+
+const indexOfAhmad = names2.indexOf("Ahmad");
+console.log("Index of Ahmad is " + indexOfAhmad);
+
+if (indexOfAhmad === -1) {
+  console.log("No Ahmad in the list!");
+} else {
+  names2.splice(indexOfAhmad, 1);
+  console.log("Ahmad is removed from the list");
+}
+
+console.log(names2); 
+// ['Peter', 'Yana', 'kristina', 'Rasmus', 'Samuel', 'Katrine', 'Tala']
 
 /**
 * When will we be there??
@@ -49,23 +77,38 @@ console.log(names); // ['Peter', 'Yana', 'kristina', 'Rasmus', 'Samuel', 'Katrin
 
 const travelInformation = {
   speed: 50,
-  destinationDistance: 432,
+  destinationDistance: 50,
 };
+
 function getDurationOfTravel(travelInformation){
     // Extract speed and distance from the object
-    const speed=travelInformation["speed"];
-    const distance=travelInformation["destinationDistance"];
+    const speed = travelInformation["speed"];
+    const distance = travelInformation["destinationDistance"];
+
+    let hoursLabel = 'hours';
+    let minutesLabel = 'minutes';
+
     // Calculate total time in hours (can be a decimal)
     const hours = Math.floor(distance / speed);
+
     // Get the decimal part of the hours and convert it to minutes
     const remainingDistance = distance / speed - hours;
     const minutes = Math.round(remainingDistance * 60);
-    // Return result
-    return `${hours} hours and ${minutes} minutes`
 
+    // Adjust labels
+    if (hours === 1){
+      hoursLabel = 'hour';
+    }
+    if (minutes === 1){
+      minutesLabel = 'minute';
+    }
+    
+    // Return result
+    return `${hours} ${hoursLabel} and ${minutes} ${minutesLabel}`;
 }
+
 const travelTime = getDurationOfTravel(travelInformation);
-console.log(travelTime); 
+console.log(travelTime);
 
 
 /**
@@ -110,6 +153,8 @@ let totalTimePercentage=0;
     const percentage = ((totalSeriesMinutes / averageLifeMinutes) * 100);
     totalTimePercentage+=percentage;
     // Print result
+
+
     console.log(`\n${series.title} took ${percentage.toFixed(3)}% of my life`);
   }
     console.log(`In total that is ${totalTimePercentage.toFixed(3)}% of my life`)
@@ -118,65 +163,63 @@ let totalTimePercentage=0;
 getSeriesLifePercentage(80,seriesDurations);
 
 
-//Smart-ease - Back to the basics!
-/**
- * sava a note
- * get a note
- */
+// Smart-ease - Back to the basics!
+
+// Save, get, list, update notes
+
 const notes = [];
 
+// Save a note
 function saveNote(content, id) {
-  notes.push({content:content,id:id});
+  if (!content || !id) {
+    console.log("Content and ID are required");
+    return;
+  }
+  notes.push({ content, id });
 }
 
 saveNote("Pick up groceries", 1);
 saveNote("Do laundry", 2);
 
-console.log(notes); // [{content: 'Pick up groceries', id: 1}, {content: 'Do laundry', id: 2}]
+console.log(notes);
 
-//Get a note
+// Get a note
 function getNote(id) {
-    for(let note of notes){
-        if (note.id===id){
-            return note;
-        }
+  for (let note of notes) {
+    if (note.id === id) {
+      return note;
     }
-    return undefined;
-  
+  }
+  return `Note with id ${id} not found`;
 }
 
 const firstNote = getNote(1);
-console.log(firstNote); // {content: 'Pick up groceries', id: 1}
+console.log(firstNote);
 
-
-//Log out notes
-/**
- * 
- */
+// Log all notes formatted
 function logOutNotesFormatted() {
-  for (let note of notes){
-    console.log(`The note with id: ${note.id}, has the following note text: ${note.content}\n`)
+  for (let note of notes) {
+    console.log(
+      `The note with id: ${note.id}, has the following note text: ${note.content}\n`
+    );
   }
 }
 
-logOutNotesFormatted(); // should log out the text below
+logOutNotesFormatted();
 
-// The note with id: 1, has the following note text: Pick up groceries
-// The note with id: 2, has the following note text: Do laundry
-
-
-// Unique feature : Update a note
-
-function updateNote(id, newcontent) {
+// Unique feature: Update a note
+function updateNote(id, newContent) {
   for (let i = 0; i < notes.length; i++) {
     if (notes[i].id === id) {
-      notes[i].content = newcontent;  
+      notes[i].content = newContent;
       return;
     }
   }
+  console.log(`No note found with id ${id}`);
 }
-updateNote(2, 'Time for learning');
-console.log(notes); 
+
+updateNote(2, "Time for learning");
+console.log(notes);
 
 
 //Smart phone usage app
