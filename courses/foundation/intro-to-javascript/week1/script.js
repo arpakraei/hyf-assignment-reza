@@ -72,6 +72,11 @@ switch (yourChoice) {
         break;
     }
 
+        console.log("\nStartup Name Generator");
+        console.log(`Your startup's name could be: "${firstWords[randomNumber1]} ${secondWords[randomNumber2]}"`);
+        break;
+    }
+
     default:
         console.log("Invalid selection! Please choose a number between 1 and 4.");
 }
