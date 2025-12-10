@@ -84,4 +84,4 @@ function getReply(command) {
 //console.log(getReply("What is on my todo?"));
 //console.log(getReply('What day is it today?'));
 //console.log(getReply('What is 3 + 3'));
-console.log(getReply('Set a timer for 1 minutes'));
+//console.log(getReply('Set a timer for 1 minutes'));
