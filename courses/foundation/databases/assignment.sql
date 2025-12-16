@@ -7,15 +7,17 @@ select count(*) as [Invalid_Due_Date]
 from task 
 where due_date is NULL ;
 
+
 /*Find all the tasks that are marked as done.*/
-select * 
-from task 
-where status_id =3;
+select task.* 
+from task , status 
+where task.status_id =status.id and lower(status.name) ='done';
 
 /*Find all the tasks that are not marked as done.*/
-select * 
-from task 
-where (status_id  in (1,2));
+select task.* 
+from task , status 
+where task.status_id =status.id and  lower(status.name) <>'done';
+
 
 /*Get all the tasks, sorted with the most recently created first.*/
 select * 
@@ -42,13 +44,12 @@ where task.status_id =status.id ;
 select status.name  , count(*) as [Number of Task]
 from task,status 
 where task.status_id = status.id 
-GROUP by status_id ;
+GROUP by status.id ,status.name  ;
 
 /*Get the names of all statuses, sorted by the status with most tasks first.*/
 select status.name  , count(*) as Number_of_Task 
 from task,status 
 where task.status_id = status.id 
-GROUP by status_id 
-ORDER by Number_of_Task DESC 
-Limit 1;
+GROUP by status.name 
+ORDER by Number_of_Task DESC;
 
