@@ -5,10 +5,12 @@ const months = [
   "January","February","March","April","May","June","July","August","September","October","November","December"
 ];
 function getReply(command) {
+        if (!command || (typeof command!=="string")){return 'Command is not valid. Try again';}
         command=command.toLowerCase();
-    if (command.includes("my name is")){
-        const startIndexOfMyNameIs=command.indexOf("my name is");
-        const lengthOfMyNameIs='my name is'.length;
+        const MY_NAME_IS='my name is';
+    if (command.includes(MY_NAME_IS)){
+        const startIndexOfMyNameIs=command.indexOf(MY_NAME_IS);
+        const lengthOfMyNameIs=MY_NAME_IS.length;
         strName=command.slice(startIndexOfMyNameIs+lengthOfMyNameIs);
         strName=strName.trim();
         return `nice to meet you ${strName}`;
@@ -48,25 +50,25 @@ function getReply(command) {
     if (command.includes('what is')){
         let expersion= command.replace('what is','');
         if (expersion.includes('*')){
-            [leftNumber,rightNumber]=expersion.split('*');
+            const[leftNumber,rightNumber]=expersion.split('*');
             return Number(leftNumber.trim())*Number(rightNumber.trim());
         }else if(expersion.includes('/')){
-            [leftNumber,rightNumber]=expersion.split('/');
+            const[leftNumber,rightNumber]=expersion.split('/');
             return Number(leftNumber.trim())/Number(rightNumber.trim());
         }
         else if(expersion.includes('+')){
-            [leftNumber,rightNumber]=expersion.split('+');
+            const[leftNumber,rightNumber]=expersion.split('+');
             return Number(leftNumber.trim())+Number(rightNumber.trim());
         }else if(expersion.includes('-')){
-            [leftNumber,rightNumber]=expersion.split('-');
+            const[leftNumber,rightNumber]=expersion.split('-');
             return Number(leftNumber.trim())-Number(rightNumber.trim());
         }
         
     }
     if(command.includes('set a timer')){
-        let expersion=command.replace('set a timer for','').trim();
-        let strTime=expersion.split(' ');
-        let timerTime=Number(strTime[0])*60*1000;
+        const expersion=command.replace('set a timer for','').trim();
+        const strTime=expersion.split(' ');
+        const timerTime=Number(strTime[0])*60*1000;
         setTimeout(function(){
             console.log("Timer done");
             }, timerTime);
@@ -75,9 +77,8 @@ function getReply(command) {
 
 } 
 
+console.log(getReply("Hello my name is Benjamin")); // "Nice to meet you benjamin"
 //console.log(getReply("What is my name?")); // "Your name is Benjamin"
-//console.log(getReply("Hello my name is Benjamin")); // "Nice to meet you benjamin"
-
 //console.log(getReply("Add fishing to my todo")); // "fishing added to your todo"
 //console.log(getReply("Add singing in the shower to my todo")); // "fishing added to your todo"
 //console.log(getReply("Remove fishing from my todo"));
@@ -85,3 +86,5 @@ function getReply(command) {
 //console.log(getReply('What day is it today?'));
 //console.log(getReply('What is 3 + 3'));
 //console.log(getReply('Set a timer for 1 minutes'));
+//console.log(getReply(78));
+
