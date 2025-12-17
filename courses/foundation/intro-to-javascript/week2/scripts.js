@@ -142,17 +142,18 @@ console.log(getFullName(undefined, null));
 */
 
 //Add Gender
-function getFullName(firstName, surName, female = false, useFormalName = false) {
-    if (!firstName || !surName) { return 'First Name or Surname is Not Valid!' }
-    else if (useFormalName) {
-        if (female) return `Lady ${firstName} ${surName}`; else { return `Lord ${firstName} ${surName}`; }
-    } else {
-        return `${firstName} ${surName}`;
-    }
+function getFullName(firstName, surName, female = false, useFormalName =false) {
+
+    if (!firstName || !surName) { return 'First Name or Surname is Not Valid!' };
+    const title=female ? 'Lady':'Lord';
+    return useFormalName 
+            ?`${title} ${firstName} ${surName}`
+            :`${firstName} ${surName}`;
+    
 }
 
-console.log(getFullName('Reza', 'Pakraei'));
-console.log(getFullName('Tahereh', 'Azadi', true, false));
+console.log(getFullName('Reza', 'Pakraei',false,true));
+console.log(getFullName('Tahereh', 'Azadi',true,true));
 console.log(getFullName(undefined, null));
 
 
@@ -185,12 +186,12 @@ function getFullName2(firstname,surname,female,useFormalName)
  * 5. Log the resulting weekday name based on the calculated index.
  */
 function getEventWeekday(numberOfDays) {
-    let today = new Date().getDay();
-    const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'];
-    console.log(weekDays[(today + numberOfDays) % 7]);
+    const today = new Date().getDay();
+    const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return weekDays[(today + numberOfDays) % 7];
 
 }
-getEventWeekday(2);
+console.log(getEventWeekday(2));
 
 
 //Weather wear
@@ -227,15 +228,15 @@ function addStudentToClass(studentName) {
     if (class07Students.includes(studentName)) {
         return `Student ${studentName} is already in the class`;
     }
-    if (studentName == 'Queen') {
+    if (studentName === 'Queen') {
         class07Students.push('Queen');
-        return;
+        return 'Queen is added';
     }
     if (class07Students.length >= class07MaxCapacity) {
         return 'Cannot add more students to class ';
     }
     class07Students.push(studentName);
-
+    return 'Student is added';
 
 }
 console.log(addStudentToClass('reza'));
