@@ -36,7 +36,7 @@ else {
 let result;
 let a = 1;
 let b = 1;
-result = (a + b < 4) ? 'Below' : 'Qver';
+result = (a + b < 4) ? 'Below' : 'Over';
 console.warn(result);
 
 
@@ -72,7 +72,7 @@ check each of them and see if the name includes letter 'a' by name.includes('a')
 - if it does not, log their name out
 
 */
-const ArrayOfFriendsName = ['Chris', 'Anne', 'Colin', 'Terri', 'Phil', 'Lola',
+const arrayOfFriendsName = ['Chris', 'Anne', 'Colin', 'Terri', 'Phil', 'Lola',
     'Sam', 'Kay', 'Bruce'];
 let counter = 0;
 for (let i = 0; i <= ArrayOfFriendsName.length - 1; i++) {   //
@@ -142,18 +142,17 @@ console.log(getFullName(undefined, null));
 */
 
 //Add Gender
-function getFullName(firstName, surName, female = false, useFormalName =false) {
-
-    if (!firstName || !surName) { return 'First Name or Surname is Not Valid!' };
-    const title=female ? 'Lady':'Lord';
-    return useFormalName 
-            ?`${title} ${firstName} ${surName}`
-            :`${firstName} ${surName}`;
-    
+function getFullName(firstName, surName, female = false, useFormalName = false) {
+    if (!firstName || !surName) { return 'First Name or Surname is Not Valid!' }
+    else if (useFormalName) {
+        if (female) return `Lady ${firstName} ${surName}`; else { return `Lord ${firstName} ${surName}`; }
+    } else {
+        return `${firstName} ${surName}`;
+    }
 }
 
-console.log(getFullName('Reza', 'Pakraei',false,true));
-console.log(getFullName('Tahereh', 'Azadi',true,true));
+console.log(getFullName('Reza', 'Pakraei'));
+console.log(getFullName('Tahereh', 'Azadi', true, false));
 console.log(getFullName(undefined, null));
 
 
