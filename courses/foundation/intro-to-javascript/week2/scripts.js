@@ -185,28 +185,14 @@ function getFullName2(firstname,surname,female,useFormalName)
  * 5. Log the resulting weekday name based on the calculated index.
  */
 function getEventWeekday(numberOfDays) {
-    let today = new Date().getDay();
-    const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'];
-    console.log(weekDays[(today + numberOfDays) % 7]);
+    const today = new Date().getDay();
+    const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return weekDays[(today + numberOfDays) % 7];
 
 }
-getEventWeekday(2);
+console.log(getEventWeekday(2));
 
-/**
- * Determines recommended clothing based on the given temperature.
- *
- * Logic:
- * 1. Check temperature ranges from coldest to warmest.
- *    - If temperature < 0°C: return heavy winter clothing.
- *    - If temperature < 10°C: return warm clothing suitable for cold weather.
- *    - If temperature < 20°C: return mild-weather clothing.
- *    - If temperature < 30°C: return light clothing for warm weather.
- * 2. If none of the above conditions match (30°C or above),
- *    return very light clothing for hot weather.
- *
- * The function evaluates conditions in ascending order,
- * ensuring the first matching range returns the proper outfit.
- */
+
 //Weather wear
 function getClothesForTemperature(temperature) {
     if (temperature < 0) {
@@ -241,15 +227,15 @@ function addStudentToClass(studentName) {
     if (class07Students.includes(studentName)) {
         return `Student ${studentName} is already in the class`;
     }
-    if (studentName == 'Queen') {
+    if (studentName === 'Queen') {
         class07Students.push('Queen');
-        return;
+        return 'Queen is added';
     }
     if (class07Students.length >= class07MaxCapacity) {
         return 'Cannot add more students to class ';
     }
     class07Students.push(studentName);
-
+    return 'Student is added';
 
 }
 console.log(addStudentToClass('reza'));
