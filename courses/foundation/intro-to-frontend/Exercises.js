@@ -26,25 +26,25 @@ const podcasts = [
 
 function main() {
     //Favourite dishes
-    const ul = $('favoriteDishes');
+    const ul = getElementById('favoriteDishes');
     for (const dish of favoriteDishes) {
-        const li = $$('li');
+        const li = creatElementByName('li');
         li.textContent = dish;
         ul.appendChild(li);
     }
     //Podcast
-    const ul_podcast=$$('ul');
+    const ul_podcast=creatElementByName('ul');
     const body=document.querySelector('body');
     body.appendChild(ul_podcast);
     for (const podcast of podcasts)
     {
-        const li_podcast=$$('li');
+        const li_podcast=creatElementByName('li');
         ul_podcast.appendChild(li_podcast);
-        const h1=$$('h1');
+        const h1=creatElementByName('h1');
         h1.innerHTML=podcast.name;
         li_podcast.appendChild(h1);
         if (podcast.imageUrl){
-            const img=$$('img');
+            const img=creatElementByName('img');
             img.src=podcast.imageUrl;
             li_podcast.appendChild(img);
         }
@@ -52,14 +52,14 @@ function main() {
     }
     //image inserter
     appendImageToElement("https://picsum.photos/536/354",
-    document.querySelector("body"));
+    //document.querySelector("body"));
 
 }
 
-function $(id) {
+function getElementById(id) {
     return document.getElementById(id);
 }
-function $$(elementName){
+function creatElementByName(elementName){
     return document.createElement(elementName);
 }
 
@@ -67,7 +67,7 @@ function $$(elementName){
 function appendImageToElement(imageUrl,elementToAppend)
 {
 
-    const img=$$('img');
+    const img=creatElementByName('img');
     img.src=imageUrl;
     elementToAppend.appendChild(img);
 };

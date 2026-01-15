@@ -13,9 +13,13 @@ function getElementById(id) {
 
 // Reads student name and assigns a random house
 function assignHouseToStudent() {
+    
     const studentNameInput = getElementById('nameOfStudent');
     const resultMessageSpan = getElementById('homeSpan');
-
+    // Guard clause: ensure required DOM elements exist before using them
+    if (!studentNameInput || !resultMessageSpan){
+        return ;
+    }
     const studentName = studentNameInput.value;
 
     // Validate input
