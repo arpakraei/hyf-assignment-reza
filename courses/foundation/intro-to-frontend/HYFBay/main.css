@@ -1,20 +1,31 @@
-body {
-  font-family: "Open Sans", sans-serif;
-  background-color: #f9fbfd;
-}
-
 * {
   box-sizing: border-box;
+  font-family: system-ui, sans-serif;
 }
 
-body,
-h1,
-h2 {
+body {
   margin: 0;
+  padding: 2rem;
+  background: #f5f6f8;
 }
 
 ul {
-  list-style-type: none;
-  margin: 0;
+  list-style: none;
   padding: 0;
+  max-width: 500px;
+  margin: auto;
+}
+
+li {
+  background: #ffffff;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-size: 0.95rem;
+}
+
+li span {
+  display: block;
+  margin-top: 0.2rem;
 }

@@ -4,11 +4,13 @@ const app = express();
 const port = 3000;
 
 app.get("/", (req, res) => {
-  res.send("Hello from exercise 1!");
+  
+  res.send("Hello from exercise 1pop!");
 });
 
 app.get("/currentYear", (req, res) => {
-  // TODO: Implement this function to return a JSON object containing the current year
+  const _date=new Date().getFullYear();
+  res.send(`This Year: ${_date}`);
 });
 
 app.listen(port, () => {
