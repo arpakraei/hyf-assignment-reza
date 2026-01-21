@@ -77,7 +77,6 @@ app.get("/last-name-count", async (req, res) => {
 });
 
 //first-user should respond with the first user. If there are no users in the table, respond with a 404
-
 app.get("/first-user", async (req, res) => {
   const rows = await knexInstance.raw(`SELECT * FROM users Limit 1;`);
     if(rows.length===0){

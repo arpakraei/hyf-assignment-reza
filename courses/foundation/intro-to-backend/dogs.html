@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+    fetch('https://dog.ceo/api/breeds/image/random/6')
+    .then(res=>res.json())
+    .then(data=>{
+        for(const url of data.message){
+            const image=document.createElement('img');
+            image.src=url;
+            image.className='image';
+            document.body.appendChild(image);
+        }
+       
+    });});
+    
+
+</script>
+</body>
+
+</html>
