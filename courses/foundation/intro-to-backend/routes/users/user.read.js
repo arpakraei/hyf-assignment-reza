@@ -5,18 +5,50 @@ import knexInstance from "../../db/knex.js"
 const router=express.Router();
 
 
+router.get("/", (req, res) => {
+  
+  res.send(`
+    <!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8" />
+        <title>User Count</title>
+      </head>
+      <body>
+        <h1>User Count Page</h1>
+        <p>Total users: <span id="count">loading...</span></p>
+
+        <script>
+          fetch("users/user-count")
+          .then(res => res.json())
+          .then(data => {
+          document.getElementById("count").textContent = data.count;
+          });
+        </script>
+      </body>
+    </html>
+  `);
+});
+
+
 router.get("/all-users", async (req, res) => {
+  try{
     const allUsers=await knexInstance('users')
     .select('*');
     res.json(allUsers);
+  }catch (error){res.status(500).json({error:"Failed to fetch users",})};
 });
 
 //unconfirmed-users should respond with unconfirmed usersv
 router.get("/unconfirmed-users", async (req, res) => {
+  try{
   const unConfirmedUser = await knexInstance('users')
   .whereNull("confirmed_at")
   .orderBy("id", "asc");
   res.json(unConfirmedUser);
+  }catch(error){
+    res.status(500).json({error:"Failed to fetch users",});
+  }
 });
 
 //gmail-users should respond with users with an @gmail.com email
@@ -53,11 +85,7 @@ router.get("/first-user", async (req, res) => {
     return res.status(404).json({error:'No user found'});
   }
   res.json(firstUser.first_name);
-  //.raw(`SELECT * FROM users Limit 1;`);
-  //  if(rows.length===0){
-   //   return res.status(404).send("<h1>User not found</h1>");
-    //}
-      
+  
 });
 export default router;
 

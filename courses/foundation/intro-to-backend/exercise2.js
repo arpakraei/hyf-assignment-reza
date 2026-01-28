@@ -16,6 +16,18 @@ const knexInstance = knex({
   useNullAsDefault: true,  // Omit warning in console
 });
 
+
+
+
+/*
+/2022-users should respond with users created in 2022
+/first-user should respond with the first user. If there are no users in the table, respond with a 404
+*/
+//unconfirmed-users should respond with unconfirmed usersv
+app.get("/unconfirmed-users", async (req, res) => {
+  const rows = await knexInstance.raw("SELECT * FROM users Where confirmed_at is Null ORDER BY id ASC;");
+  res.json(rows);
+});
 app.get("/", (req, res) => {
   
   res.send(`
@@ -46,18 +58,6 @@ app.get("/all-users", async (req, res) => {
   const rows = await knexInstance.raw("SELECT * FROM users ORDER BY id ASC;");
   res.json(rows);
 });
-
-
-/*
-/2022-users should respond with users created in 2022
-/first-user should respond with the first user. If there are no users in the table, respond with a 404
-*/
-//unconfirmed-users should respond with unconfirmed usersv
-app.get("/unconfirmed-users", async (req, res) => {
-  const rows = await knexInstance.raw("SELECT * FROM users Where confirmed_at is Null ORDER BY id ASC;");
-  res.json(rows);
-});
-
 //gmail-users should respond with users with an @gmail.com email
 app.get("/gmail-users", async (req, res) => {
   const rows = await knexInstance.raw('SELECT * FROM users Where email like "%@gmail.com" ORDER BY id ASC;');

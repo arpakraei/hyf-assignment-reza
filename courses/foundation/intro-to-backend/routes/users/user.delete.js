@@ -1,14 +1,13 @@
 import express from "express";
-import knexInstance from "../../db/knex";
+import knexInstance from "../../db/knex.js";
 
 
 const router=express.Router();
 
 // DELETE /users/:id
 // Deletes a user from the database by user ID
-router.delete("/users/:id",async(req,res)=>{
+router.delete("/:id",async(req,res)=>{
     const {id}= req.params;
-    console.log(id);
     const userDeleted= await knexInstance('users')
     .where('id',id)
     .del();
@@ -18,3 +17,5 @@ router.delete("/users/:id",async(req,res)=>{
     res.json({ message: "User deleted successfully" });
     
 });
+
+export default router;
