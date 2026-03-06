@@ -1,7 +1,5 @@
 Carrot
 Broccoli
-Cabbage
+Cauliflower
 Cucumber
 Eggplant
-Asparagus
-Bell Pepper
