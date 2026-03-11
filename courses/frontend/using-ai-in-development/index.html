@@ -47,11 +47,18 @@
    
 </style>
 <script>
-    function changeBackground() {
-        const colors = ['#FFB6C1', '#98FB98', '#87CEFA', '#DDA0DD', '#F0E68C', '#E6E6FA'];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    const backGroundColors = ['#FFB6C1', '#98FB98', '#87CEFA', '#DDA0DD', '#F0E68C', '#E6E6FA'];
+    function getRandomColor(arrayColor){
+       const index= Math.floor(Math.random() * arrayColor.length);
+       return randomColor = arrayColor[index];
+    }
+    function changeBackgroundColor() {
+        const randomColor=getRandomColor(backGroundColors);
         document.body.style.backgroundColor = randomColor;
     }
+    document.addEventListener("DOMContentLoaded",()=>{
+        document.getElementById('changeBackgroundColor').addEventListener('click',changeBackgroundColor)
+    })
 </script>
 </head>
 <body>
@@ -63,7 +70,7 @@
 		<li>Thinking</li>
 		<li>Writting</li>
 	</ul>
-        <button class="color-button" onclick="changeBackground()">Change Background Color!</button>
+        <button id="changeBackgroundColor" class="color-button">Change Background Color!</button>
     </div>
 </body>
 </html>
