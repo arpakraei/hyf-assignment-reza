@@ -1,0 +1,8 @@
+#nav li{background-color:aqua;}
+#nav ul{
+    display: flex; 
+    gap: 1em;
+    list-style: none;
+    }
+
+#nav li.active{background-color: red;}
