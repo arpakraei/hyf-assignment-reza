@@ -16,7 +16,7 @@ function findShortTitleMovies(movies){
 }
 
 
-console.log(findShortTitleMovies(movies))
+//console.log(findShortTitleMovies(movies))
 
 //2: long title Movie(movies);
 function findLongeMovie(movies){
@@ -76,9 +76,30 @@ function DuplicatedWord(movies){
 
     });
     
-    
 }
 //console.log(DuplicatedWord(movies));
+
+//Calculate the average rating
+function averageMoviesRating(movies){
+    
+    return movies.reduce((movieSum,movie)=>{return movieSum+movie.rating;},0)/movies.length;
+}
+//console.log(averageMoviesRating(movies));
+
+//Count the total number
+function countRatingMovie(movies){
+    const movieTagedArray=addMovieTag(movies);
+    
+    return countRating=movieTagedArray.reduce((acc,movie)=>{
+        if(movie.tag==='Good') acc.Good++;
+        else if(movie.tag==='Average') acc.Avg++;
+        else acc.Bad++;
+        return acc;
+    },{Good:0,Avg:0,Bad:0});
+    
+
+}
+//console.log(countRatingMovie(movies));
 
 function createCard(title, contentArray) {
     const card = document.createElement("div");
@@ -135,6 +156,16 @@ function renderAllCards(movies) {
     // Task 7
     const duplicated = DuplicatedWord(movies).map(m => m.title);
     grid.appendChild(createCard("Duplicated Titles", duplicated));
+
+    //Task 8
+    const averageMovieRating = averageMoviesRating(movies).toFixed(2);
+    grid.appendChild(createCard("Avrage Movie Rating", [averageMovieRating]));
+
+    //Task 9
+    const countMovieRating=countRatingMovie(movies);
+    const formatted = Object.entries(countMovieRating).map(([key,val])=>`${key}:${val}`);
+    grid.appendChild(createCard("Count Moveis Rating",formatted));
+
 }
 
 renderAllCards(movies);
