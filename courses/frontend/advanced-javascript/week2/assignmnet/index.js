@@ -60,7 +60,7 @@ userLocationBut.addEventListener('click',()=>{
     
 })
 
-const googleMapApiKey='AIzaSyDXuchFfUzqLdcMYLY0_SxIp3dRk3YR7DI'
+
 
 
 //function 8
