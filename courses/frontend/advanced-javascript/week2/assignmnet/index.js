@@ -60,8 +60,32 @@ userLocationBut.addEventListener('click',()=>{
     
 })
 
+//function 7
+/* Create a function called runAfterDelay. It has two parameters: delay and callback. 
+When called the function should wait delay seconds and then call the provided callback function. 
+Add an input in the HTML for the delay (in seconds) and a button; 
+when the button is clicked, read the delay from the input and call runAfterDelay with that delay 
+and a callback that displays something on the page.
+ */
+const delayButton=document.getElementById('delayBut');
+const delay=document.getElementById('timer');
 
+delayButton.addEventListener('click',()=>{
+    
+    const delayBySecond=Number(delay.value);
+    if (!delayBySecond) return;
+    runAfterDelay(delayBySecond,()=>showDelayedMessage(delayBySecond));
 
+});
+function runAfterDelay(delayInSeconds,callback){
+    setTimeout(()=>{
+        
+        callback();
+    },delayInSeconds*1000);
+}
+function showDelayedMessage(delay){
+    console.log(`This message delayed ${delay} Second`);
+}
 
 //function 8
 document.addEventListener('dblclick',()=>{alert('You double click here!');console.log('you double clicked')});
@@ -89,4 +113,42 @@ function logBadJoke(){
 }
 
 jokeCreator(true,logFunnyJoke,logBadJoke);
+
+
+//3-Function as a variable
+
+//task1
+const arrayOfFunctions=[add,multiply,divide];
+function add(a,b){
+    console.log(`a + b = ${ a + b }`);
+}
+function multiply(a,b){
+    console.log(`a * b = ${ a * b }`);
+}
+
+function divide(a,b){
+    console.log(`a / b = ${ a / b }`);
+}
+
+arrayOfFunctions.forEach((item)=>item(3,4));
+
+//task2 
+//Area and perimeter of rectangle length and width
+
+//area(2,3);
+const area=(width,length)=>{
+    
+    console.log(`Area of rectangle: ${width *length }`);
+}
+area(2,3);
+
+//task 3
+const operations={
+    add,
+    multiply,
+    divide,
+}
+operations.add(5,4);
+operations.multiply(5,4);
+operations.divide(5,4);
 

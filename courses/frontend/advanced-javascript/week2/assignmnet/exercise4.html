@@ -1,39 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fastest Presser</title>
-    <script src="exercise4.js" defer></script>
+  <meta charset="UTF-8">
+  <title>Keyboard Game</title>
+  <script src="exercise4.js" defer></script>
 </head>
 <body>
-    <section id="header">
-        <h1>Fastest Presser</h1>
-    </section>
-    <section id="main">
-        <div id="container">
-            <div id="input">
-                <label for="time">Set Second:</label>
-                <input type="text" name="time" id="gameRound" >
-                <button id="startBut">Start Game</button>
-                
-            </div>
-        </div>
-        <section id="displayBoard">
-            <div id="player1">
-                <h2>Presser L</h2>
-                <p id="presser1"></p>
-            </div>
-            <div id="player2">
-                <h2>Presser S</h2>
-                <p id="presser2"></p>
-            </div>
-            <div id="winmessage">
 
-            </div>
+  <h2>Press "L" or "S" as fast as you can!</h2>
 
-        </section>
-    </section>
-    
+  <input type="number" id="game-time" placeholder="Enter seconds" />
+
+  <button id="start-button">Start Game</button>
+
+  <h3>Timer: <span id="timer-display">0</span></h3>
+
+  <p>Player L: <span id="player-l-score">0</span></p>
+  <p>Player S: <span id="player-s-score">0</span></p>
+
+  <h3 id="result-message"></h3>
+
+  <script src="index.js"></script>
 </body>
 </html>
