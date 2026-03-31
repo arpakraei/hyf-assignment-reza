@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Reza</title>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        transition: background-color 0.3s ease;
+
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .color-button {
+        display: block;
+        margin: 20px auto 0;
+        padding: 12px 24px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .color-button:hover {
+        background-color: #45a049;
+        transform: scale(1.05);
+    }
+   
+</style>
+<script>
+    const backGroundColors = ['#FFB6C1', '#98FB98', '#87CEFA', '#DDA0DD', '#F0E68C', '#E6E6FA'];
+    function getRandomColor(arrayColor){
+       const index= Math.floor(Math.random() * arrayColor.length);
+       return randomColor = arrayColor[index];
+    }
+    function changeBackgroundColor() {
+        const randomColor=getRandomColor(backGroundColors);
+        document.body.style.backgroundColor = randomColor;
+    }
+    document.addEventListener("DOMContentLoaded",()=>{
+        document.getElementById('changeBackgroundColor').addEventListener('click',changeBackgroundColor)
+    })
+</script>
+</head>
+<body>
+    <div class="container">
+	<h1>About me</h1>
+	<p>I'm Reza from Iran. I'm passionate about learning, creating, and sharing knowledge with others.</p>
+	<ul>
+		<li>Reading</li>
+		<li>Thinking</li>
+		<li>Writting</li>
+	</ul>
+        <button id="changeBackgroundColor" class="color-button">Change Background Color!</button>
+    </div>
+</body>
+</html>
