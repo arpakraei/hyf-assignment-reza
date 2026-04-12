@@ -3,6 +3,9 @@ body {
     background-color: #f4f4f4;
     padding: 20px;
 }
+.title{
+    text-align: center;
+}
 
 /* Card container */
 .card {
@@ -29,11 +32,12 @@ body {
     padding-top: 8px;
 }
 
-.card-content p {
+.card-content .content {
     margin: 5px 0;
+    
 }
 
-#cardGrid {
+.cardGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 25px;
