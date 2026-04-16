@@ -28,6 +28,25 @@ capture_button.addEventListener("click", async () => {
   }
 });
 
+save_button.addEventListener("click", async () => {
+  try {
+    if (!currentScreenshot) {
+      throw new ValidationError("Screenshot dont exist!");
+    }
+    await currentScreenshot.Save();
+  } catch (err) {
+    if (err instanceof ValidationError) {
+      userMessage.textContent = err.toUserMessage();
+    } else if (err instanceof ApiError) {
+      userMessage.textContent = err.toUserMessage();
+    } else if (err instanceof NetworkError) {
+      userMessage.textContent = err.toUserMessage();
+    } else {
+      userMessage.textContent = "Somethings goes Wrong";
+    }
+  }
+});
+
 async function getScreenshot(url) {
   const rapidUrl = `https://website-screenshot6.p.rapidapi.com/screenshot?url=${url}&width=1280&height=800`;
 
