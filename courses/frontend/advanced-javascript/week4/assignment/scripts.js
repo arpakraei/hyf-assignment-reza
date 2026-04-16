@@ -3,6 +3,57 @@ const save_button = document.getElementById("save-button");
 const url_input = document.getElementById("url-input");
 const userMessage = document.getElementById("userMessage");
 const imgPreview = document.getElementById("imgPreview");
+const screenshotList = document.getElementById("screenshot-list");
+
+//******************************* */
+class Screenshot {
+  constructor(url, imagedata, id = null, date = null) {
+    this._url = url;
+    this._imagedata = imagedata;
+    this._id = id;
+    this._date = date;
+  }
+  async Save() {
+    const option = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        screenshotUrl: this._url,
+        screenshotData: this._imagedata,
+        screenshotDate: new Date().toLocaleString(),
+      }),
+    };
+
+    try {
+      const response2 = await fetch(CONFIG.CRUDCRUD_URL, option);
+      const data2 = await response2.json();
+
+      if (!response2.ok) {
+        throw new ApiError("crudcrud: Api error check the configration");
+      }
+      this._id = data2._id;
+    } catch (err) {
+      if (err instanceof ApiError) {
+        throw err;
+      } else {
+        throw new NetworkError("crudcrud: Check your connection.");
+      }
+    }
+  }
+  render() {
+    const card = document.createElement("div");
+    const cardImg = document.createElement("img");
+    const cardUrl = document.createElement("p");
+    const cardDeleteButton = document.createElement("button");
+    cardDeleteButton.innerText = "Delete";
+    cardUrl.textContent = this._url;
+    cardImg.src = this._imagedata;
+    card.appendChild(cardImg);
+    card.appendChild(cardUrl);
+    card.appendChild(cardDeleteButton);
+    screenshotList.appendChild(card);
+  }
+}
 
 //***************************** */
 
@@ -34,6 +85,7 @@ save_button.addEventListener("click", async () => {
       throw new ValidationError("Screenshot dont exist!");
     }
     await currentScreenshot.Save();
+    console.log(currentScreenshot);
   } catch (err) {
     if (err instanceof ValidationError) {
       userMessage.textContent = err.toUserMessage();
@@ -111,3 +163,41 @@ class NetworkError extends AppError {
     super(message);
   }
 }
+
+async function getAllScreenshots() {
+  const option = {
+    method: "GET",
+  };
+  try {
+    const response = await fetch(CONFIG.CRUDCRUD_URL, option);
+    const data = await response.json();
+    if (!response.ok) {
+      throw new ApiError("curdcurd: Get list Error");
+    }
+    return data;
+  } catch (err) {
+    if (err instanceof ApiError) {
+      throw err;
+    } else {
+      throw new NetworkError("curdcurd: Network error");
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const screenshots = await getAllScreenshots();
+
+    screenshots.forEach((item) => {
+      let screenshot = new Screenshot(
+        item.screenshotUrl,
+        item.screenshotData,
+        item._id,
+        item.screenshotDate,
+      );
+      screenshot.render();
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+});
