@@ -46,12 +46,37 @@ class Screenshot {
     const cardUrl = document.createElement("p");
     const cardDeleteButton = document.createElement("button");
     cardDeleteButton.innerText = "Delete";
+    cardDeleteButton.addEventListener("click", async () => {
+      await this.delete();
+      card.remove();
+    });
+
     cardUrl.textContent = this._url;
     cardImg.src = this._imagedata;
     card.appendChild(cardImg);
     card.appendChild(cardUrl);
     card.appendChild(cardDeleteButton);
     screenshotList.appendChild(card);
+  }
+  async delete() {
+    const option = {
+      method: "DELETE",
+    };
+    const deleteUrl = `${CONFIG.CRUDCRUD_URL}/${this._id}`;
+    try {
+      const response = await fetch(deleteUrl, option);
+
+      if (!response.ok) {
+        throw new ApiError("curdcurd: Delete Error");
+      }
+      return response;
+    } catch (err) {
+      if (err instanceof ApiError) {
+        throw err;
+      } else {
+        throw new NetworkError("curdcurd: Network error");
+      }
+    }
   }
 }
 
