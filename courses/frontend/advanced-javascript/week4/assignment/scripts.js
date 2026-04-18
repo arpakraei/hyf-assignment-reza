@@ -41,22 +41,27 @@ class Screenshot {
     }
   }
   render() {
-    const card = document.createElement("div");
-    const cardImg = document.createElement("img");
-    const cardUrl = document.createElement("p");
-    const cardDeleteButton = document.createElement("button");
-    cardDeleteButton.innerText = "Delete";
-    cardDeleteButton.addEventListener("click", async () => {
-      await this.delete();
-      card.remove();
-    });
+    try {
+      const card = document.createElement("div");
+      const cardImg = document.createElement("img");
+      const cardUrl = document.createElement("p");
+      const cardDeleteButton = document.createElement("button");
+      cardDeleteButton.innerText = "Delete";
+      cardDeleteButton.addEventListener("click", async () => {
+        await this.delete();
+        card.remove();
+      });
 
-    cardUrl.textContent = this._url;
-    cardImg.src = this._imagedata;
-    card.appendChild(cardImg);
-    card.appendChild(cardUrl);
-    card.appendChild(cardDeleteButton);
-    screenshotList.appendChild(card);
+      cardUrl.textContent = this._url;
+      cardImg.src = this._imagedata;
+      card.appendChild(cardImg);
+      card.appendChild(cardUrl);
+      card.appendChild(cardDeleteButton);
+      screenshotList.appendChild(card);
+    } catch (err) {
+      const error = new ApiError("Someting goes wrong");
+      userMessage.textContent = error.toUserMessage();
+    }
   }
   async delete() {
     const option = {
