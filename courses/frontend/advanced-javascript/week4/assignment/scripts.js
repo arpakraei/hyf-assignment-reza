@@ -4,6 +4,7 @@ const url_input = document.getElementById("url-input");
 const userMessage = document.getElementById("userMessage");
 const imgPreview = document.getElementById("imgPreview");
 const screenshotList = document.getElementById("screenshot-list");
+const preview = document.getElementById("preview-container");
 
 //******************************* */
 class Screenshot {
@@ -43,23 +44,32 @@ class Screenshot {
   render() {
     try {
       const card = document.createElement("div");
-      const cardImg = document.createElement("img");
-      const cardUrl = document.createElement("p");
-      const cardDeleteButton = document.createElement("button");
-      cardDeleteButton.innerText = "Delete";
-      cardDeleteButton.addEventListener("click", async () => {
+      card.className = "col";
+
+      card.innerHTML = `
+  <div class="card h-100" >
+    <img src="${this._imagedata}" class="card-img-top" alt="Screenshot">
+    <div class="card-body">
+      <p class="card-text mb-0">URL: ${this._url}</p>
+      <p class="card-text mb-0">DATE: ${this._date}</p>
+      <div class="d-flex justify-content-between align-items-center">
+  
+      <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+    </div>
+    </div>
+  </div>
+`;
+
+      const deleteBtn = card.querySelector(".delete-btn");
+
+      deleteBtn.addEventListener("click", async () => {
         await this.delete();
         card.remove();
       });
 
-      cardUrl.textContent = this._url;
-      cardImg.src = this._imagedata;
-      card.appendChild(cardImg);
-      card.appendChild(cardUrl);
-      card.appendChild(cardDeleteButton);
       screenshotList.appendChild(card);
     } catch (err) {
-      const error = new ApiError("Someting goes wrong");
+      const error = new ApiError("Someting goes wrong!");
       userMessage.textContent = error.toUserMessage();
     }
   }
@@ -72,14 +82,14 @@ class Screenshot {
       const response = await fetch(deleteUrl, option);
 
       if (!response.ok) {
-        throw new ApiError("curdcurd: Delete Error");
+        throw new ApiError("curdcurd: Delete Error.");
       }
       return response;
     } catch (err) {
       if (err instanceof ApiError) {
         throw err;
       } else {
-        throw new NetworkError("curdcurd: Network error");
+        throw new NetworkError("curdcurd: Network error.");
       }
     }
   }
@@ -96,6 +106,7 @@ capture_button.addEventListener("click", async () => {
     const currentScreenshotData = await getScreenshot(screenshotUrl);
     currentScreenshot = new Screenshot(screenshotUrl, currentScreenshotData);
     imgPreview.src = currentScreenshotData;
+    preview.classList.remove("d-none");
   } catch (err) {
     if (err instanceof ValidationError) {
       userMessage.textContent = err.toUserMessage();
@@ -215,6 +226,10 @@ async function getAllScreenshots() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  renderAllScreenshot();
+});
+
+async function renderAllScreenshot() {
   try {
     const screenshots = await getAllScreenshots();
 
@@ -230,4 +245,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (err) {
     console.log(err.message);
   }
-});
+}
