@@ -1,10 +1,37 @@
-const capture_button = document.getElementById("capture-button");
-const save_button = document.getElementById("save-button");
-const url_input = document.getElementById("url-input");
+const captureButton = document.getElementById("capture-button");
+const saveButton = document.getElementById("save-button");
+const urlInput = document.getElementById("url-input");
 const userMessage = document.getElementById("userMessage");
 const imgPreview = document.getElementById("imgPreview");
 const screenshotList = document.getElementById("screenshot-list");
 const preview = document.getElementById("preview-container");
+
+//******************************* */
+
+class AppError extends Error {
+  constructor(message) {
+    super(message);
+  }
+
+  toUserMessage() {
+    return this.message;
+  }
+}
+class ValidationError extends AppError {
+  constructor(message) {
+    super(message);
+  }
+}
+class ApiError extends AppError {
+  constructor(message) {
+    super(message);
+  }
+}
+class NetworkError extends AppError {
+  constructor(message) {
+    super(message);
+  }
+}
 
 //******************************* */
 class Screenshot {
@@ -27,11 +54,11 @@ class Screenshot {
 
     try {
       const response2 = await fetch(CONFIG.CRUDCRUD_URL, option);
-      const data2 = await response2.json();
 
       if (!response2.ok) {
         throw new ApiError("crudcrud: Api error check the configration");
       }
+      const data2 = await response2.json();
       this._id = data2._id;
     } catch (err) {
       if (err instanceof ApiError) {
@@ -69,7 +96,7 @@ class Screenshot {
 
       screenshotList.appendChild(card);
     } catch (err) {
-      const error = new ApiError("Someting goes wrong!");
+      const error = new AppError("Someting goes wrong!");
       userMessage.textContent = error.toUserMessage();
     }
   }
@@ -99,66 +126,25 @@ class Screenshot {
 
 let currentScreenshot = null;
 
-capture_button.addEventListener("click", async () => {
-  const screenshotUrl = url_input.value;
-  try {
-    urlValidation(screenshotUrl);
-    const currentScreenshotData = await getScreenshot(screenshotUrl);
-    currentScreenshot = new Screenshot(screenshotUrl, currentScreenshotData);
-    imgPreview.src = currentScreenshotData;
-    preview.classList.remove("d-none");
-  } catch (err) {
-    if (err instanceof ValidationError) {
-      userMessage.textContent = err.toUserMessage();
-    } else if (err instanceof ApiError) {
-      userMessage.textContent = err.toUserMessage();
-    } else if (err instanceof NetworkError) {
-      userMessage.textContent = err.toUserMessage();
-    } else {
-      userMessage.textContent = "Somethings goes Wrong";
-    }
-  }
-});
-
-save_button.addEventListener("click", async () => {
-  try {
-    if (!currentScreenshot) {
-      throw new ValidationError("Screenshot dont exist!");
-    }
-    await currentScreenshot.Save();
-    console.log(currentScreenshot);
-  } catch (err) {
-    if (err instanceof ValidationError) {
-      userMessage.textContent = err.toUserMessage();
-    } else if (err instanceof ApiError) {
-      userMessage.textContent = err.toUserMessage();
-    } else if (err instanceof NetworkError) {
-      userMessage.textContent = err.toUserMessage();
-    } else {
-      userMessage.textContent = "Somethings goes Wrong";
-    }
-  }
-});
+//***************************** */
 
 async function getScreenshot(url) {
-  const rapidUrl = `https://website-screenshot6.p.rapidapi.com/screenshot?url=${url}&width=1280&height=800`;
+  const rapidUrl = `https://website-screenshot6.p.rapidapi.com/screenshot?url=${encodeURIComponent(url)}&width=1280&height=800`;
 
   const option = {
     method: "GET",
     headers: {
       "x-rapidapi-key": CONFIG.RAPIDAPI_KEY,
       "x-rapidapi-host": CONFIG.RAPIDAPI_HOST,
-      "Content-Type": "application/json",
     },
   };
   try {
     const response = await fetch(rapidUrl, option);
-    const data = await response.json();
 
     if (!response.ok) {
       throw new ApiError("Rapid: Api error check the configration");
     }
-
+    const data = await response.json();
     return data.screenshotUrl;
   } catch (err) {
     if (err instanceof ApiError) {
@@ -180,41 +166,17 @@ function urlValidation(url) {
   }
 }
 
-class AppError extends Error {
-  constructor(message) {
-    super(message);
-  }
-
-  toUserMessage() {
-    return this.message;
-  }
-}
-class ValidationError extends AppError {
-  constructor(message) {
-    super(message);
-  }
-}
-class ApiError extends AppError {
-  constructor(message) {
-    super(message);
-  }
-}
-class NetworkError extends AppError {
-  constructor(message) {
-    super(message);
-  }
-}
-
 async function getAllScreenshots() {
   const option = {
     method: "GET",
   };
   try {
     const response = await fetch(CONFIG.CRUDCRUD_URL, option);
-    const data = await response.json();
+
     if (!response.ok) {
       throw new ApiError("curdcurd: Get list Error");
     }
+    const data = await response.json();
     return data;
   } catch (err) {
     if (err instanceof ApiError) {
@@ -224,10 +186,6 @@ async function getAllScreenshots() {
     }
   }
 }
-
-document.addEventListener("DOMContentLoaded", async () => {
-  renderAllScreenshot();
-});
 
 async function renderAllScreenshot() {
   try {
@@ -246,3 +204,36 @@ async function renderAllScreenshot() {
     console.log(err.message);
   }
 }
+
+//********************************************** */
+
+captureButton.addEventListener("click", async () => {
+  const screenshotUrl = urlInput.value;
+  try {
+    urlValidation(screenshotUrl);
+    const currentScreenshotData = await getScreenshot(screenshotUrl);
+    currentScreenshot = new Screenshot(screenshotUrl, currentScreenshotData);
+    imgPreview.src = currentScreenshotData;
+    preview.classList.remove("d-none");
+  } catch (err) {
+    userMessage.textContent =
+      err instanceof AppError ? err.toUserMessage() : "Somethings goes Wrong";
+  }
+});
+
+saveButton.addEventListener("click", async () => {
+  try {
+    if (!currentScreenshot) {
+      throw new ValidationError("Screenshot dont exist!");
+    }
+    await currentScreenshot.Save();
+    console.log(currentScreenshot);
+  } catch (err) {
+    userMessage.textContent =
+      err instanceof AppError ? err.toUserMessage() : "Somethings goes Wrong";
+  }
+});
+
+document.addEventListener("DOMContentLoaded", async () => {
+  renderAllScreenshot();
+});
