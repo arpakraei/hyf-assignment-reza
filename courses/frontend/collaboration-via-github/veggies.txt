@@ -3,3 +3,5 @@ Broccoli
 Cauliflower
 Cucumber
 Eggplant
+Asparagus
+Bell Pepper
