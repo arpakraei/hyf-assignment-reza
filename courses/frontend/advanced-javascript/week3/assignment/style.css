@@ -1,0 +1,206 @@
+:root {
+    --color-primary: #667eea;
+    --color-white: #ffffff;
+    --color-border: #e5e7eb;
+    --color-text-secondary: #6b7280;
+}
+
+/* Layout */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+/* Card */
+
+.converter-card {
+    background: var(--color-white);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+}
+
+/* Header */
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 1.75rem;
+    color: #1a1a2e;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Form */
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    background-color: #f9fafb;
+    color: #1f2937;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--color-primary);
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+/* Currency Row */
+
+.currency-row {
+    display: flex;
+    gap: 16px;
+}
+
+.currency-row .form-group {
+    flex: 1;
+}
+
+/* Swap Button */
+
+.swap-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 28px;
+}
+
+.swap-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    background: var(--color-white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.swap-btn:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.swap-btn:hover svg {
+    stroke: var(--color-white);
+}
+
+.swap-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--color-text-secondary);
+    transition: stroke 0.2s ease;
+}
+
+/* Convert Button */
+
+.convert-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-white);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+
+.convert-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.convert-btn:active {
+    transform: translateY(0);
+}
+
+/* Result */
+
+.result-box {
+    margin-top: 24px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f0f4ff 0%, #f5f0ff 100%);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.result-label {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+}
+
+.result-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.result-info {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    margin-top: 8px;
+}
+
+/* Responsive */
+
+@media (max-width: 480px) {
+    .converter-card {
+        padding: 24px;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .currency-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .swap-icon {
+        padding: 0;
+        margin: -8px 0;
+    }
+}

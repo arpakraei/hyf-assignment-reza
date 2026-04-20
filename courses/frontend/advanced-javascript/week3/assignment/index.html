@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="converter-card">
+        <div class="header">
+            <h1>Currency Converter</h1>
+            <p>Convert between currencies instantly</p>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" name="amount" min="1" value="1" placeholder="Enter amount">
+        </div>
+
+        <div class="currency-row">
+            <div class="form-group">
+                <label for="from">From</label>
+                <select id="from">
+                    
+                </select>
+            </div>
+
+            <div class="swap-icon">
+                <button class="swap-btn" type="button" title="Swap currencies">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h18m-2.5-10.5L21 10.5m0 0L16.5 15M21 10.5H3" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label for="to">To</label>
+                <select id="to">
+                    
+                </select>
+            </div>
+        </div>
+
+        <button id="change-but" class="convert-btn">Convert Currency</button>
+
+        <div class="result-box">
+            <p class="result-label">Converted Amount</p>
+            <p id="result" class="result-value">--</p>
+            <p id="rate-perUint"class="result-info"></p>
+        </div>
+    </div>
+
+    <script src="scripts.js" defer></script>
+</body>
+</html>
