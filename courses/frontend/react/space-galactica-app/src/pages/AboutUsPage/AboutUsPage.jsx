@@ -3,7 +3,7 @@ import OurValues from "./OurValues";
 import OurPartners from "./OurPartners";
 import OurCrew from "./OurCrew";
 
-// 🧑🏽‍🚀 Task - Week 1
+// 🧑🏽‍🚀 Done: Task - Week 1
 // After you are finished with creating the page, move the OurValues, OurCrew, OurPartners components into their own files in this folder.
 // Import and use the components from the newly created files.
 
