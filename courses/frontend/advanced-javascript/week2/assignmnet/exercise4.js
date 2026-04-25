@@ -1,129 +1,129 @@
-// Elements 
-const startButton = document.getElementById('start-button');
-const timeInput = document.getElementById('game-time');
-const playerLScore = document.getElementById('player-l-score');
-const playerSScore = document.getElementById('player-s-score');
-const resultMessage = document.getElementById('result-message');
-const timerDisplay = document.getElementById('timer-display');
-const resultOverlay = document.getElementById('result-overlay');
-const playAgainButton = document.getElementById('play-again-button');
+// Elements
+const startButton = document.getElementById("start-button");
+const timeInput = document.getElementById("game-time");
+const playerLScore = document.getElementById("player-l-score");
+const playerSScore = document.getElementById("player-s-score");
+const resultMessage = document.getElementById("result-message");
+const timerDisplay = document.getElementById("timer-display");
+const resultOverlay = document.getElementById("result-overlay");
+const playAgainButton = document.getElementById("play-again-button");
 
-//  Game State 
+//  Game State
 const gameState = {
-    lPressCount: 0,
-    sPressCount: 0,
-    isGameActive: false,
-    durationSeconds: 0,
-    intervalId: null,
+  lPressCount: 0,
+  sPressCount: 0,
+  isGameActive: false,
+  durationSeconds: 0,
+  intervalId: null,
 };
 
 //Key Press Listener
-document.addEventListener('keydown', (event) => {
-    if (!gameState.isGameActive) return;
+document.addEventListener("keydown", (event) => {
+  if (!gameState.isGameActive) return;
+  if (event.repeat) return;
 
-    const key = event.key.toLowerCase();
+  const key = event.key.toLowerCase();
 
-    if (key === 'l') {
-        gameState.lPressCount++;
-        playerLScore.textContent = gameState.lPressCount;
-    } else if (key === 's') {
-        gameState.sPressCount++;
-        playerSScore.textContent = gameState.sPressCount;
-    }
+  if (key === "l") {
+    gameState.lPressCount++;
+    playerLScore.textContent = gameState.lPressCount;
+  } else if (key === "s") {
+    gameState.sPressCount++;
+    playerSScore.textContent = gameState.sPressCount;
+  }
 });
 
-// Start Game 
-startButton.addEventListener('click', () => {
-    const seconds = Number(timeInput.value);
+// Start Game
+startButton.addEventListener("click", () => {
+  const seconds = Number(timeInput.value);
 
-    // Validate input
-    if (Number.isNaN(seconds) || seconds <= 0) return;
+  // Validate input
+  if (Number.isNaN(seconds) || seconds <= 0) return;
 
-    // Reset state
-    gameState.lPressCount = 0;
-    gameState.sPressCount = 0;
-    gameState.durationSeconds = seconds;
+  // Reset state
+  gameState.lPressCount = 0;
+  gameState.sPressCount = 0;
+  gameState.durationSeconds = seconds;
 
-    // Update UI
-    startButton.disabled = true;
-    resultMessage.textContent = '';
-    playerLScore.textContent = 0;
-    playerSScore.textContent = 0;
+  // Update UI
+  startButton.disabled = true;
+  resultMessage.textContent = "";
+  playerLScore.textContent = 0;
+  playerSScore.textContent = 0;
 
-    startCountdown(seconds);
+  startCountdown(seconds);
 });
 
-// Timer Logic 
+// Timer Logic
 function startCountdown(seconds) {
-    // Clear existing interval if any
-    if (gameState.intervalId) {
-        clearInterval(gameState.intervalId);
-        gameState.intervalId = null;
-    }
+  // Clear existing interval if any
+  if (gameState.intervalId) {
+    clearInterval(gameState.intervalId);
+    gameState.intervalId = null;
+  }
 
-    let remainingTime = seconds;
-    timerDisplay.textContent = remainingTime;
-    gameState.isGameActive = true;
+  let remainingTime = seconds;
+  timerDisplay.textContent = remainingTime;
+  gameState.isGameActive = true;
 
-    gameState.intervalId = setInterval(() => {
-        remainingTime--;
+  gameState.intervalId = setInterval(() => {
+    remainingTime--;
 
-        if (remainingTime === 0) {
-            clearInterval(gameState.intervalId);
-            gameState.intervalId = null;
+    if (remainingTime === 0) {
+      clearInterval(gameState.intervalId);
+      gameState.intervalId = null;
 
-            // End game immediately
-            timerDisplay.textContent = remainingTime;
-            gameState.isGameActive = false;
+      // End game immediately
+      timerDisplay.textContent = remainingTime;
+      gameState.isGameActive = false;
 
-            startButton.disabled = false;
-            timeInput.value = '';
+      startButton.disabled = false;
+      timeInput.value = "";
 
-            displayWinner();
-        } else {
-            timerDisplay.textContent = remainingTime;
-        }
-    }, 1000);
-}
-
-//  Display Winner 
-function displayWinner() {
-    resultOverlay.classList.add('show');
-
-    if (gameState.lPressCount > gameState.sPressCount) {
-        document.querySelector('.player-l').classList.add('winner');
-        resultMessage.textContent = `Player L wins with ${gameState.lPressCount} presses`;
-    } else if (gameState.lPressCount < gameState.sPressCount) {
-        document.querySelector('.player-s').classList.add('winner');
-        resultMessage.textContent = `Player S wins with ${gameState.sPressCount} presses`;
+      displayWinner();
     } else {
-        resultMessage.textContent = `It's a draw!`;
+      timerDisplay.textContent = remainingTime;
     }
+  }, 1000);
 }
 
-// Play Again 
-playAgainButton.addEventListener('click', () => {
+//  Display Winner
+function displayWinner() {
+  resultOverlay.classList.add("show");
 
-    // Hide overlay
-    resultOverlay.classList.remove('show');
+  if (gameState.lPressCount > gameState.sPressCount) {
+    document.querySelector(".player-l").classList.add("winner");
+    resultMessage.textContent = `Player L wins with ${gameState.lPressCount} presses`;
+  } else if (gameState.lPressCount < gameState.sPressCount) {
+    document.querySelector(".player-s").classList.add("winner");
+    resultMessage.textContent = `Player S wins with ${gameState.sPressCount} presses`;
+  } else {
+    resultMessage.textContent = `It's a draw!`;
+  }
+}
 
-    // Remove winner highlight
-    document.querySelectorAll('.player-card').forEach(card => {
-        card.classList.remove('winner');
-    });
+// Play Again
+playAgainButton.addEventListener("click", () => {
+  // Hide overlay
+  resultOverlay.classList.remove("show");
 
-    // Reset game state
-    gameState.lPressCount = 0;
-    gameState.sPressCount = 0;
-    gameState.isGameActive = false;
+  // Remove winner highlight
+  document.querySelectorAll(".player-card").forEach((card) => {
+    card.classList.remove("winner");
+  });
 
-    // Reset UI
-    playerLScore.textContent = 0;
-    playerSScore.textContent = 0;
-    timerDisplay.textContent = 0;
-    resultMessage.textContent = '';
-    timeInput.value = '';
+  // Reset game state
+  gameState.lPressCount = 0;
+  gameState.sPressCount = 0;
+  gameState.isGameActive = false;
 
-    // Enable start button
-    startButton.disabled = false;
+  // Reset UI
+  playerLScore.textContent = 0;
+  playerSScore.textContent = 0;
+  timerDisplay.textContent = 0;
+  resultMessage.textContent = "";
+  timeInput.value = "";
+
+  // Enable start button
+  startButton.disabled = false;
 });
