@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presser - Keyboard Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <h1 class="game-title">Presser</h1>
+      <p class="game-subtitle">Press your key as fast as you can!</p>
+    </header>
+
+    <div class="timer-section">
+      <span id="timer-display" class="timer-display">0</span>
+      <span class="timer-label">seconds</span>
+    </div>
+
+    <div class="players-section">
+      <div class="player-card player-s">
+        <span class="player-key">S</span>
+        <span class="player-label">Player S</span>
+        <span id="player-s-score" class="player-score">0</span>
+      </div>
+
+      <div class="versus">VS</div>
+
+      <div class="player-card player-l">
+        <span class="player-key">L</span>
+        <span class="player-label">Player L</span>
+        <span id="player-l-score" class="player-score">0</span>
+      </div>
+    </div>
+
+    <div class="controls-section">
+      <div class="input-group">
+        <label for="game-time" class="input-label">Game Duration (seconds)</label>
+        <input type="number" id="game-time" class="time-input" placeholder="Enter seconds" min="1">
+      </div>
+      <button id="start-button" class="start-button">Start Game</button>
+    </div>
+  </div>
+
+  <div id="result-overlay" class="result-overlay">
+    <div class="result-card">
+      <span id="result-message" class="result-message"></span>
+      <button id="play-again-button" class="play-again-button">Play Again</button>
+    </div>
+  </div>
+
+  <script src="exercise4.js"></script>
+</body>
+</html>
