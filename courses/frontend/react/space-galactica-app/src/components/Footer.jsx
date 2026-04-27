@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 
 export const Footer = () => {
@@ -12,20 +13,10 @@ export const Footer = () => {
           Explore the universe and beyond. Your journey to the stars starts
           here.
         </p>
-        <p>&copy; 2024 Galactica. All rights reserved.</p>
+        <p>&copy; 2026 Galactica. All rights reserved.</p>
       </div>
-      {/* 🧑🏽‍🚀 Task - Week 2 */}
-      {/* Create a new list for the Pages. */}
-      {/* We need to use the <Link /> component here. */}
-      {/* <div className={styles.pages}>
-        <h3>Pages</h3>
-        <ul>
-          <li> <Link/> </li>
-          ...
-        </ul>
-      </div> */}
-      {/* Docs for the Link: https://reactrouter.com/api/components/Link#link. */}
-
+      {/* 🧑🏽‍🚀 Done Task - Week 2 */}
+      <Navigation />
       {/* 🧑🏽‍🚀 Done: Task - Week 1 */}
       {/* Add a new list item for LINKEDIN */}
       <div className={styles.footerLinks}>
@@ -55,3 +46,32 @@ export const Footer = () => {
     </footer>
   );
 };
+
+function Navigation() {
+  {
+    /* Create a new list for the Pages. */
+  }
+  const pages = [
+    { path: "/", name: "Home" },
+    { path: "/about_us", name: "About Us" },
+    { path: "/destination", name: "Destination" },
+    { path: "/nasa_collaboration", name: "NasaCollaboration" },
+  ];
+  return (
+    <>
+      {/* We need to use the <Link /> component here. */}
+      <div className={styles.pages}>
+        <h3>Pages</h3>
+        <ul>
+          {pages.map((page, index) => (
+            <li key={page.path}>
+              <Link to={page.path}>{page.name}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Docs for the Link: https://reactrouter.com/api/components/Link#link. */}
+    </>
+  );
+}
