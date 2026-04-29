@@ -1,10 +1,37 @@
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
+import { SocialMediaItem } from "./SocialMediaItem";
 
 export const Footer = () => {
   const { pathname } = useLocation();
-
+  const socialMediaItems = [
+    {
+      url: "https://www.linkedin.com/",
+      title: "LinkedIn",
+      icon: "./icons/linkedin.png",
+    },
+    {
+      url: "https://facebook.com",
+      title: "Facebook",
+      icon: "./icons/facebook.png",
+    },
+    {
+      url: "https://instagram.com",
+      title: "Instagram",
+      icon: "./icons/instagram.png",
+    },
+    {
+      url: "https://tiktok.com",
+      title: "Tiktok",
+      icon: "./icons/tiktok.png",
+    },
+    {
+      url: "https://google.com",
+      title: "On the streets at night",
+      icon: "./icons/googlestreet.png",
+    },
+  ];
   return (
     <footer className={pathname !== "/" ? styles.footer : styles.hidden}>
       <div className={styles.footerDescription}>
@@ -22,25 +49,25 @@ export const Footer = () => {
       <div className={styles.footerLinks}>
         <h3>Follow us</h3>
         <ul className={styles.footerList}>
-          <li>
-            <a href="https://www.linkedin.com/">LinkedIn</a>
-          </li>
-          <li>
-            <a href="https://facebook.com">Facebook</a>
-          </li>
-          <li>
-            <a href="https://instagram.com">Instagram</a>
-          </li>
-          <li>
-            <a href="https://tiktok.com">Tiktok</a>
-          </li>
-          <li>
-            <a href="https://google.com">On the streets at night</a>
-          </li>
-          {/* 🧑🏽‍🚀 Task - Week 2 */}
-          {/* Create a <SocialMediaItem /> component and replace all of the list items! */}
-          {/* SocialMediaItem should accept the following props: url, title, icon. */}
-          {/* For the icons, you can download 1-2 social media icons for testing and put it in the /public/socialmedia/ folder. */}
+          {socialMediaItems.map((item, index) => {
+            return (
+              <li key={index}>
+                <SocialMediaItem
+                  url={item.url}
+                  title={item.title}
+                  icon={item.icon}
+                />
+              </li>
+            );
+
+            /* 🧑🏽‍🚀 Done Task - Week 2 */
+
+            /* Create a <SocialMediaItem /> component and replace all of the list items! */
+
+            /* SocialMediaItem should accept the following props: url, title, icon. */
+
+            /* For the icons, you can download 1-2 social media icons for testing and put it in the /public/socialmedia/ folder. */
+          })}
         </ul>
       </div>
     </footer>
