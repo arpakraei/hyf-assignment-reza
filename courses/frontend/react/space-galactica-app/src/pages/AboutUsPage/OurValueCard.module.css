@@ -1,0 +1,18 @@
+.OurValueCard {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.OurValueCard h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+}
+
+.OurValueCard p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+}
