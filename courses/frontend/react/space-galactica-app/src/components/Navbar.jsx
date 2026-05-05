@@ -49,7 +49,7 @@ export const Navbar = () => {
               </>
             );
           })}
-          {/* 🧑🏽‍🚀 Task - Week 3 */}
+          {/* 🧑🏽‍🚀 Done Task - Week 3 */}
           {/* Replace repeating content by using .map() and the previously created NavItem component. 
           <li className={styles.wishlistBadge} aria-label="Wishlist"></li> */}
         </ul>
