@@ -10,6 +10,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "start": "vite",
     "build": "vite build",
     "format": "npx prettier . --write",
     "check": "npx eslint . --fix"
