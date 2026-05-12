@@ -1,18 +1,17 @@
-import { useState } from "react";
 import styles from "./DestinationPage.module.css";
 import PlanetCard from "./PlanetCard.jsx";
 import { AddWishlistItem } from "./AddWishlistItem";
 import PlanetsWishlistItem from "./PlanetsWishlistItem";
+import { useWishlist } from "../../contexts/WishlistContext.jsx";
 
 export const Destinations = () => {
-  const [planetsWishlist, setPlanetsWishlist] = useState([]);
-
-  const isPlanetInWishlist = (planetName) => {
-    // 🧑🏽‍🚀 Done Task - Week 2
-    // This should be a simple function to check if a given planet is selected.
-    // You will need to work with the array of planets wishlist.
-    return planetsWishlist.some((planet) => planet.name === planetName);
-  };
+  const {
+    planetsWishlist,
+    addPlanetToWishlist,
+    removePlanetFromWishlist,
+    isPlanetInWishlist,
+    wishlistCount,
+  } = useWishlist();
 
   const togglePlanetSelection = (name, thumbnail) => {
     // 🧑🏽‍🚀 Done Task - Week 2
@@ -21,17 +20,6 @@ export const Destinations = () => {
     isPlanetInWishlist(name)
       ? removePlanetFromWishlist(name)
       : addPlanetToWishlist(name, thumbnail);
-  };
-
-  const addPlanetToWishlist = (name, thumbnail) => {
-    // 🧑🏽‍🚀 Done Task - Week 2
-    // Add the planet to the planets wishlist state.
-    setPlanetsWishlist((prev) => [...prev, { name, thumbnail }]);
-  };
-  const removePlanetFromWishlist = (name) => {
-    // 🧑🏽‍🚀 Done Task - Week 2
-    // Remove the planet from the planets wishlist state.
-    setPlanetsWishlist((prev) => prev.filter((planet) => planet.name !== name));
   };
 
   return (
@@ -44,7 +32,7 @@ export const Destinations = () => {
           {/* Display the number of wishlist planets, if there are any planets in the wishlist. */}
           {/* Display the "no planets" message if the wishlist is empty. */}
           {/* 🧑🏽‍🚀 Use a variable to display the number of wishlist planets:  */}
-          {planetsWishlist.length ? (
+          {wishlistCount ? (
             <p>You have {planetsWishlist.length} planets in your wishlist</p>
           ) : (
             <p>No planets in your wishlist </p>
@@ -122,7 +110,7 @@ export const Destinations = () => {
 
 export default Destinations;
 
-// 🧑🏽‍🚀 Task - Week 4 - part 2
+// 🧑🏽‍🚀 Done Task - Week 4 - part 2
 // Hate to break it to you, but you will have to make some changes to the code you already wrote.
 // Now that you have context, grab and use the context data in this.
 // You will need to replace some of the variables and functions with the ones from the context.
